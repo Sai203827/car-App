@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .form-container form {
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem;
+    position: absolute;
+    top: 16rem;
+    left: 250px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 0.5rem;
+    width: 60%;
+}
+.input-box{
+    flex: 1 1 7rem;
+    display:grid;
+    flex-direction: column;
+}
+.input-box span{
+    font-weight: 500;
+}
+.input-box input{
+    padding: 7px;
+    outline: none;
+    border: none;
+    background: #eeeff1;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+.form-container form .btn1{
+    flex: 1 1 9rem;
+    display: grid;
+    padding: 10px 1px;
+    border: none;
+    border-radius: 0.5rem;
+    background: #474fa0;
+    color:#fff;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+    
+.btn-icon{
+    padding-left: 96px;
+    text-align: center;
+    padding-top: 30px;
+    font-size: 60px;
+    letter-spacing: 170px;
+    border-bottom: 90px;
+}
+</style>
+<body>
+    <form method="POST" action="{{url_for('pay')}}" >
+        <input type="hidden" name='carid' value="{{carid}}">
+        <input type="hidden" name='carname' value="{{carname}}">
+        <input type="hidden" name='price' value="{{price}}">
+
+        <div class="form-container">
+            <div class="input-box">
+
+            <span>Locations</span>
+            <input type="search" name="location" placeholder="search location">
+        </div>  
+        <div class="input-box">
+            <label >Check-in date:</label>
+    <input type="time" name="check_in" required>
+    <label >Check-out date:</label>
+    <input type="time" name="check_out" required>
+        </div>
+        <input type="submit" name="submit" id="" class="btn1">
+        </form>
+        </div>
+</body>
+</html>  

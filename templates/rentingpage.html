@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='rentingpage.css')}}">
+</head>
+<body style="background-color: rgb(235, 227, 227) ;">
+  <div>
+    <img src="{{url_for('static', filename='images/2.jpg')}}" class="image">
+</div>
+ 
+
+    <div class="btn-icon" style="background-color: aqua;">
+        <a href="#"><i class="fa-sharp fa-solid fa-bars"></i></i></a>
+        <a href="#one"><i class="fa-solid fa-road"></i></a>
+        <a href="#"><i class="fa-solid fa-robot"></i></ion-icon></a>
+        <a href="#"><i class="fa-sharp fa-solid fa-car-on"></i></a>
+        <a href="#"><i class="fa-sharp fa-solid fa-gas-pump"></i></a>
+        <a href="#"><i class="fa-sharp fa-solid fa-thumbs-up"></i></a>
+        
+        
+
+      </div>
+      
+    <div style="background-color: aqua;">
+    <h5 class="paragraph1" >All _RoadTrip Autogear S_Roof disel__ luxury</h5>
+</div>
+</form>
+
+{% for i in items %}
+<center>
+
+<div class="main">
+<div class="container">
+  <div class="wrapper">
+  
+    
+    <div class="banner-image"> 
+  <img src="{{url_for('static',filename=i[0]+'.jpg')}}" class="banner-image"> 
+ 
+  <h6>{{i[1]}} {{i[5]}}</h6>
+  <div class="matter">
+  <p>{{i[2]}}</p>
+  <p>{{i[3]}}</p>
+  <p>{{i[4]}}</p>
+  
+</div>
+<div class="matter1">
+  <p>{{i[6]}}</p>
+  <p>{{i[7]}}</p>
+  <p>{{i[8]}}</p>
+</div><br><br>
+<div>
+ <a href="{{url_for('location',carid=i[0])}}" ><button class="custom-btn btn-9"><label> RENT NOW</label> </button> </a>  
+ 
+  </div>
+</div>
+</div>
+</div>
+{% endfor %}
+</center>
+
+
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

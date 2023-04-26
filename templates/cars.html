@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+  /* Center the form on the page */
+  body{
+    background-attachment: fixed;
+    background-color: black;
+  }
+  .login-box{
+    position: relative;
+    width: 400px;
+    height: 700px;
+    background: transparent;
+    background-attachment: fixed;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(70px)
+    
+}
+section{
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: url(https://wallpaperaccess.com/full/83785.jpg) no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    margin-top: -20px;
+    margin-left: -5px;
+    animation: animateBg 5s linear infinite;
+}
+@keyframes animateBg{
+    100%{
+        filter:hue-rotate(360deg);
+    }
+}
+/* Style the form fields */
+.input-box {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-box input,
+.input-box select,
+.input-box textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid white;
+  border-radius: 15px;
+  border-radius: 10px solid white;
+  background:transparent;
+  
+}
+
+.input-box label {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  font-size: 16px;
+  color: #999;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label,
+.input-box select:focus + label,
+.input-box select:not(:placeholder-shown) + label,
+.input-box textarea:focus + label,
+.input-box textarea:not(:placeholder-shown) + label {
+  top: -20px;
+  font-size: 17px;
+  color: #ffffff;
+}
+
+/* Style the select field */
+.input-box select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml,<svg viewBox="0 0 10 5" xmlns="http://www.w3.org/2000/svg"><polygon points="5 0 0 5 10 5"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 8px auto;
+  padding-right: 30px;
+}
+
+/* Style the file input field */
+.input-box input[type="file"] {
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  font-size: 16px;
+}
+
+/* Style the submit button */
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  border-radius: 30px;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+input, select, textarea {
+color: 2px solid white;
+}
+</style>
+</head>
+<body>
+  <section>
+    
+    <div class="login-box">
+    <form method="POST" enctype="multipart/form-data">
+  
+      <div class="input-box">
+        <input type="text" name="name" required style="color: beige; ">
+        <label>Car Nmae</label>
+      </div>
+      <span class="input-group-btn" 
+      style="width:0px;"></span>
+      <div class="input-box">
+        <input  type="text" name="carno" required style="color: beige; ">
+        <label>CAR NO</label>
+      </div>
+      <div class="input-box">
+        <input type="text" name="year" required style="color: beige; ">
+        <label>CAR YEAR</label>
+        </div>
+        
+          
+  
+          <div class="input-box">
+            <input type="text" name="model" required style="color: beige; ">
+            <label>CAR Model</label>
+            </div>
+            <div class="input-box">
+              <input type="text" name="milage" required style="color: beige; ">
+              <label>MILAGE</label>
+              </div>
+              <div class="input-box">
+                <input type="text" name="price" required style="color: beige; ">
+                <label>price</label>
+                </div>
+                <div class="input-box">
+                  <input type="text" name="desc" required style="color: beige; ">
+                  <label>Discription</label>
+                  </div>
+                  <div class="input-box">
+                    <select name="category">
+                      <label>category</label>
+                      <option>4-seaters</option>
+              <option>2-seaters</option>
+              <option>electic car</option>
+              <option>luxury car</option>
+              <option>disel</option>
+              <option>Petrol</option>
+              
+                    </select>
+                    <div>
+                      <input  type="">
+                    </div>
+                    <br>
+                  <div class="input-box">
+                    <input type="file" name="image" required style="color: beige; ">
+                    <label>Car image</label>
+                    </div>
+ <button>Submit</button>
+
+</form> 
+</div>
+</section>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

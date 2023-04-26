@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Data</title>
+</head>
+<body>
+    <form method="post">
+    <table>
+        <tr>
+            <th>Booking ID</th>
+            <th>Car ID</th>
+            <th>Car Name</th>
+            <th>Check-In Date</th>
+            <th>Check-Out Date</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Mobile Number</th>
+        </tr>
+        {% for i in rent %}
+        <tr>
+            <td>{{ i[0] }}</td>
+            <td>{{ i[1] }}</td>
+            <td>{{ i[2] }}</td>
+            <td>{{ i[3] }}</td>
+            <td>{{ i[4] }}</td>
+            <td>{{ i[5] }}</td>
+            <td>{{ i[6] }}</td>
+            <td>{{ i[7] }}</td>
+            <td>{{ i[8] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+</body>
+</html>

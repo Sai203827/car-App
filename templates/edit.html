@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items Status</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='itemsstatus.css')}}"/>
+    <script src="https://kit.fontawesome.com/6c07c94f28.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+      {% for message in messages %}
+        <center><b>{{ message }}</b></center>
+      {% endfor %}
+  {% endif %}
+{% endwith %}
+<body>
+    <form class="form-item">
+        <label class="ilabel">Search:</label>&nbsp;&nbsp;
+        <input type="search" name="search" placeholder="Search here"/>
+        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+    <center>
+        <table border="2" width="60%">
+            <tr>
+
+                <td>carid</td>
+                <td>carname</td>
+                <td>Carno</td>
+                <td>year</td>
+                <td>carmodel</td>
+                <td>milage</td>
+                <td>category</td>
+                <td>price</td>
+                <td>discription</td>
+                <td>Update</td>
+                <td>Delete</td>
+                <td>Status</td>
+            </tr>
+            {% for i in cars %}
+                <tr>
+                    <td>{{ i[0] }}</td>
+                    <td>{{ i[1] }}</td>
+                    <td>{{ i[2] }}</td>
+                    <td>{{ i[3] }}</td>
+                    <td>{{ i[4] }}</td>
+                    <td>{{ i[5] }}</td>
+                    <td>{{ i[6] }}</td>
+                    <td>{{ i[7] }}</td>
+                    <td>{{ i[8] }}</td>
+                    
+                </tr>
+            {% endfor %}
+        </table>
+    </center>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>  
+
+</body>
+</html>

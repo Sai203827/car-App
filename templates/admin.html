@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+   <link rel="stylesheet" href="{{url_for('static',filename='admin.css')}}">
+</head>
+<body style="background-color: rgb(0, 0, 0);">
+    <h1 class="admin-heading">Admin DashBoard</h1>
+
+                        <div  class="main">
+                            <div class="container3">
+                                <div class="wrapper">
+                                    <div class="banner-image" style="background-image: url(https://www.shutterstock.com/image-vector/car-add-new-line-icon-600w-600027707.jpg); height: 300px;"> </div>
+                                  <h1 class="heading1">ADD CARS</h1>
+                                  <p class="para">Add your latest cars here, <br/>
+                                    and Your      car details.</p>
+                                 </div>
+                                 <div class="button-wrapper"> 
+                                    <a href="{{url_for('admin_home')}}"><button class="btn fill">Add Cars</button></a>
+                                 </div>
+                                   </div>
+                                   <div class="container3"></div>
+
+                                   <div class="container3" style="justify-content: space-between;">
+                                    <div class="wrapper">
+                                        <div class="banner-image" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv2N1OjKNmUyc1C-kPX_BOldWPDWe6_yR6fpO8s-Bw14ZuMrg4i35hl6iCCsI7PEGNSwKV_N4UnG8&usqp=CAU&ec=48600112);"> </div>
+                                      <h1 class="heading1">CAR STATUS</h1>
+                                      <p class="para">Lorem ipsum dolor sit amet, <br/>
+                                        consectetur adipiscing elit.</p>
+                                     </div>
+                                     <div class="button-wrapper"> 
+                                        <a href="{{url_for('bookings')}}"><button class="btn fill">CAR STATUS</button></a>
+                                     </div>
+                                       </div>
+                                   <div class="container3"></div>
+                                   <div class="container3">
+                                    <div class="wrapper">
+                                        <div class="banner-image" style="background-image: url(https://i.pinimg.com/originals/4e/3f/a8/4e3fa8512086ef248bc876c481a11e09.jpg);"></div>
+                                      <h1 class="heading1"> KIA</h1>
+                                      <p class="para">Lorem ipsum dolor sit amet, <br/>
+                                        consectetur adipiscing elit.</p>
+                                     </div>
+                                     <div class="button-wrapper"> 
+                                      <a href="{{url_for('edit')}}"><button class="btn fill">RENT NOW</button></a>
+                                     </div>
+                                       </div>
+                                       <div>
+                                       
+                                   
+                                          </div>
+                                          
+                                        </div>
+                                        <center>
+                                            <button class="glow-on-hover" type="button">LOG OUT</button>
+                                        </center>
+                                       </div>
+                                </div>
+                                
+                                      </div>
+                                   </div>
+                                </div>
+                                  </div>
+                               </div>
+                        </div>
+                              </div>
+                            </div>
+                            <div>
+                                
+                            </div>
+                        </div>
+                      </div>
+                      
+<div>
+  <table cellpadding="10px">
+    {% for i in data %}
+        <tr>
+            <td>{{i[2]}}</td>
+            <td><a href="#">View</a></td>
+            <td><a href="#">Update</a></td>
+            <td><a href="#">Delete</a></td>
+            <td>{{i[4]}}</td>
+        </tr>
+    {% endfor %}
+        
+   </table>
+</div>
+
+
+
+
+
+
+
+
+    </div>
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    
+</body>
+</html>

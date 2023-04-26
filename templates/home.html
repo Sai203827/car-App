@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='home.css')}}"/>
+    <title>Document</title>
+</head>
+<body>
+    <header class="showcase">
+        <div class="showcase-top">
+            <img src="{{url_for('static',filename='images/mainn.png')}}" class="hide-bg" alt="" />
+            <a href="{{url_for('logout')}}" class="btn btn-rounded">Log out</a>
+        </div>
+        <div class="showcase-content">
+            <h1>Start Your Trip ></h1>
+            <p>GO anywhere. Cancel Anytime</p>
+            <a href="{{url_for('home2')}}" class="btn btn-xl">Book Your Ride Now <i class="fas fa-chevron-right btn-icon"></i
+            ></a>
+        </div>
+    </header>
+    <section class="tabs">
+        <div class="container">
+            <div id="tab-1" class="tab-item tab-border">
+                <i class="fas fa-door-open fa-3x"></i>
+                <p class="hide-sm">Cancel at any time</p>
+            </div>
+            <div id="tab-2" class="tab-item">
+                <i class="fas fa-tablet-alt fa-3x"></i>
+                <p class="hide-sm">GO Anywhere</p>
+            </div>
+            <div id="tab-3" class="tab-item">
+                <i class="fas fa-tags fa-3x"></i>
+                <p class="hide-sm">Pick your price</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="tab-content">
+        <div class="container">
+            <!-- Tab Content 1 -->
+            <div id="tab-1-content" class="tab-content-item show">
+                <div class="tab-1-content-inner">
+                    <div>
+                        <p class="text-lg">
+                            If you decide to cancel The Ride - no problem.
+                            Cancel online anytime.
+                        </p>
+                        <a href="home2.html" class="btn btn-lg">Book Your Ride Now</a>
+                    </div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjEWIyAtojlZtVWS1qWvA9gnpJ0_ewpZQETWC5n0Wqdg&usqp=CAU&ec=48600112" alt="" />
+                </div>
+            </div>
+
+            <!-- Tab Content 2 -->
+            <div id="tab-2-content" class="tab-content-item">
+                <div class="tab-2-content-top">
+                    <p class="text-lg">
+                        Ride To Any City In India anytime, anywhere — personalized for
+                        you.
+                    </p>
+                    <a href="home2.html" class="btn btn-lg">Book Your Ride Now</a>
+                </div>
+                <div class="tab-2-content-bottom">
+                    <div>
+                        <img src="https://www.agratrip.in/pages/img/agra-car.jpg" alt="" />
+                        <p class="text-md">
+                            Book AnyWhere
+                        </p>
+                        <p class="text-dark">
+                          
+                        </p>
+                    </div>
+                    <div>
+                        <img class="hide-bg1" src="https://www.shutterstock.com/image-photo/man-reads-book-car-during-260nw-1754195888.jpg" alt="" />
+                        <p class="text-md">
+                            Long Distance In Low Price
+                        </p>
+                        <p class="text-dark">
+                            Family Trips, Vaction, Meeting.
+                        </p>
+                    </div>
+                    <div>
+                        <img src="https://www.westend61.de/images/0001349764pw/happy-friends-in-convertible-car-on-a-road-trip-SDAHF00731.jpg" alt="" />
+                        <p class="text-md">
+                            Make The Trip Fun.
+                        </p>
+                        <p class="text-dark">
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content 3 -->
+            <div id="tab-3-content" class="tab-content-item">
+                <div class="text-center">
+                    <p class="text-lg">
+                        Choose a car and go anywhere.
+                    </p>
+                    <a href="home2.html" class="btn btn-lg">Book Your Car Now ></a>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Normal Car</th>
+                            <th>Family Car</th>
+                            <th>Luxury Car</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monthly price after free month ends on 6/19/19</td>
+                            <td>$8.99</td>
+                            <td>$12.99</td>
+                            <td>$15.99</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Seaters</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>AC/NON AC</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Disel/Petrol</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>More Than 100KM </td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Top Less Car</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Cancel anytime</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>First month free</td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                            <td><i class="fas fa-check"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>Questions? Call +91 8106048417</p>
+        <div class="footer-cols">
+            <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Investor Relations</a></li>
+                <li><a href="#">How to Rent</a></li>
+                <li><a href="#">Corporate Information</a></li>
+                <li><a href="#">RENT4U</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Jobs</a></li>
+                <li><a href="#">Terms Of Use</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">Redeem Gift Cards</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Rules</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Media Center</a></li>
+                <li><a href="#">Buy Gift Cards</a></li>
+                <li><a href="#">Cookie Preferences</a></li>
+                <li><a href="#">Legal Notices</a></li>
+            </ul>
+        </div>
+
+    </footer>
+    <script>
+        const tabItems = document.querySelectorAll('.tab-item');
+const tabContentItems = document.querySelectorAll('.tab-content-item');
+
+// Select tab content item
+function selectItem(e) {
+	// Remove all show and border classes
+	removeBorder();
+	removeShow();
+	// Add border to current tab item
+	this.classList.add('tab-border');
+	// Grab content item from DOM
+	const tabContentItem = document.querySelector(`#${this.id}-content`);
+	// Add show class
+	tabContentItem.classList.add('show');
+}
+
+// Remove bottom borders from all tab items
+function removeBorder() {
+	tabItems.forEach(item => {
+		item.classList.remove('tab-border');
+	});
+}
+
+// Remove show class from all content items
+function removeShow() {
+	tabContentItems.forEach(item => {
+		item.classList.remove('show');
+	});
+}
+
+// Listen for tab item click
+tabItems.forEach(item => {
+	item.addEventListener('click', selectItem);
+});
+
+    </script>
+</body>
+</html>
