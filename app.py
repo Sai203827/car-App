@@ -6,35 +6,46 @@ from flask_session import Session
 from otp import genotp
 from cmail import sendmail
 import random
+from flask_login import LoginManager, login_required
 import stripe
 from tokenreset import token
 import os
 from io import BytesIO
 stripe.api_key='sk_test_51N0NrXSJwdQx8caK7N1qOMe4uYYL9VmVpRwIpZuN4vmCEJBJ92P6pe6hIZX7NK9HptfNQBbJaCy3nB0Gq7j9hXxI00igK2ZeMv'
 app=Flask(__name__)
-db=os.environ['RDS_DB_NAME']
-user=os.environ['RDS_USERNAME']
-password=os.environ['RDS_PASSWORD']
-host=os.environ['RDS_HOSTNAME']
-port=os.environ['RDS_PORT']
-mydb=mysql.connector.connect(host=host,user=user,password=password,db=db,port=port)
-#mydb=mysql.connector.connect(host='localhost',user='root',password='admin',db='db_name')
-with mysql.connector.connect(host=host,user=user,password=password,db=db,port=port) as conn:
-    cursor=conn.cursor()
-    cursor.execute('CREATE TABLE if not exists admin (mobile varchar(50) primary key, password varchar(50),email varchar(50))')
-    cursor.execute('CREATE TABLE if not exists cars(carid varchar(8) primary key,carname varchar(50),carno varchar(50),caryear  varchar(50),category varchar(50), carmodel varchar(50), milage varchar(50),price varchar(50),description tinytext, mobile varchar(50))')
-    cursor.execute('CREATE TABLE if not exists register (emailid varchar(50), username varchar(20),mobile varchar(10) primary key,dob date, password varchar(50), filename varchar(50), licencecard longblob)')
-    cursor.execute('CREATE TABLE if not exists rent (rentid int auto_increment,carid varchar(30), carname char(30),check_in varchar(50), check_out varchar(50),total_price int, mobile varchar(50), qty int,foreign key(carid) references cars(carid) on update cascade on delete cascade,foreign key(mobile) refernces register(mobile)')
-   
+app.secret_key='*67@hjyjhk'
+app.config['SESSION_TYPE']='filesystem'
+app.config['MYSQL_HOST']='localhost'
+app.config['MYSQL_USER']='root'
+app.config['MYSQL_PASSWORD']='Sai $123'
+app.config['MYSQL_DB']='car-rental'
+login_manager = LoginManager()
+login_manager.init_app(app)
 mydb=mysql.connector.connect(host='localhost',user='root',password='admin',db='car')
 Session(app)
 mysql=MySQL(app)
+
 @app.route('/')
 def main():
     return render_template('main.html')
 @app.route('/admin1',methods=['GET','POST'])
 def admin1():
-    return render_template('admin.html')
+    return render_template('dashboard.html')
+@app.route('/dashuserdetails')
+@login_manager.user_loader
+def load_user(mobile):
+    # Fetch the user object from the database using the user_id
+    return mobile.query.get(int(mobile))
+
+def dashuserdetails():
+    if session.get('user'):
+        cursor=mydb.cursor()
+        cursor.execute('select * from register')
+        user=cursor.fetchall()
+        cursor.close()
+        print(user)  
+        return render_template('dashuserdetails.html', user=user)
+    return render_template('dashuserdetails.html')
 @app.route('/registration',methods=['GET','POST'])
 def signup():
     if request.method=='POST':
@@ -46,7 +57,7 @@ def signup():
         licencecard=request.files['licencecard']
         filename=licencecard.filename
 
-        cursor=mysql.connection.cursor()
+        cursor=mydb.cursor()
         cursor.execute('select mobile from register')
         data=cursor.fetchall()
         cursor.execute('SELECT emailid from register')
@@ -79,7 +90,7 @@ def login():
     if request.method=='POST':
         mobile=request.form['mobile']
         password=request.form['password']
-        cursor=mysql.connection.cursor()
+        cursor=mydb.cursor()
         cursor.execute('select count(*) from register where mobile=%s and password=%s',[mobile,password])
         count=cursor.fetchone()[0]
         if count==0:
@@ -90,16 +101,20 @@ def login():
             return redirect(url_for('home'))
         
     return render_template('login.html')
-
-
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+@app.route('/dashuser', methods=['POST','GET'])
+def dashuser():
+    return render_template('dashusers.html')
 @app.route('/admin',methods=['GET','POST'])
 def admin():
     if session.get('admin'):
-        return render_template('admin.html')
+        return render_template('dashboard.html')
     if request.method=='POST':
         mobile=request.form['mobile']
         password=request.form['password']
-        cursor=mysql.connection.cursor()
+        cursor=mydb.cursor()
         cursor.execute('select count(*) from admin where mobile=%s and password=%s',[mobile,password])
         count=cursor.fetchone()[0]
         print(count)
@@ -132,14 +147,19 @@ def admin_home():
         path=r"E:\car\project\carrental1\static"
         image.save(os.path.join(path,filename))
         print('success')
-    return render_template('cars.html')
+    return render_template('dashusers.html')
+
+
+
 @app.route('/rental',methods=['POST','GET'])
 def rental():
-    cursor=mydb.cursor()
-    cursor.execute("select * from cars")
-    items=cursor.fetchall()
-    return render_template('rentingpage.html',items=items)
-
+    if session.get('user'):
+        cursor=mydb.cursor()
+        cursor.execute("select * from cars")
+        items=cursor.fetchall()
+        return render_template('rentingpage.html',items=items)
+    else:
+         return redirect(url_for('login'))
 '''@app.route('/rent',methods=['POST','GET'])
 def rent():
     return redirect(url_for('pay'))'''
@@ -175,6 +195,9 @@ def home2():
 @app.route('/about')
 def about():
     return render_template('about.html')
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 @app.route('/logout')   
 def logout():
     if session.get('user'):
@@ -188,12 +211,12 @@ def otp(otp,emailid,username,mobile,dob,password,filename):
     if request.method=='POST':
         uotp=request.form['otp']
         if otp==uotp:
-            cursor=mysql.connection.cursor()
+            cursor=mydb.cursor()
             licencecard=session['filedata']
             lst=[emailid,username,mobile,dob,password,filename,licencecard]
             query='insert into register values(%s,%s,%s,%s,%s,%s,%s)'
             cursor.execute(query,lst)
-            mysql.connection.commit()
+            mydb.commit()
             cursor.close()
             flash('Details registered')
             
@@ -205,7 +228,7 @@ def otp(otp,emailid,username,mobile,dob,password,filename):
 def forget():
     if request.method=='POST':
         mobile=request.form['mobile']
-        cursor=mysql.connection.cursor()
+        cursor=mydb.cursor()
         cursor.execute('select mobile from register')
         data=cursor.fetchall()
         if (mobile,) in data:
@@ -230,9 +253,9 @@ def createpassword(token):
             npass=request.form['npassword']
             cpass=request.form['cpassword']
             if npass==cpass:
-                cursor=mysql.connection.cursor()
+                cursor=mydb.cursor()
                 cursor.execute('update register set password=%s where mobile=%s',[npass,mobile])
-                mysql.connection.commit()
+                mydb.commit()
                 return 'Password reset Successfull'
             else:
                 return 'Password mismatch'
@@ -242,66 +265,74 @@ def createpassword(token):
 @app.route('/booking')
 def booking():
     return render_template('booking.html')
-@app.route('/edit')
-def edit():
+@app.route('/dashcartable')
+def dashcartable():
     if session.get('user'):
-        cursor=mysql.connection.cursor()
+        cursor=mydb.cursor()
         cursor.execute('select * from cars')
         cars=cursor.fetchall()
         cursor.close()
         print(cars)  
-        return render_template('edit.html', cars=cars)
-    return render_template('edit.html')
+        return render_template('dashcartable.html', cars=cars)
+    return render_template('dashcartable.html')
 
-'''@app.route('/view/<carid>')
+@app.route('/view/<carid>')
 def view(carid):
-    cursor=mysql.connection.cursor()
+    cursor=mydb.cursor()
     cursor.execute('select carname,carno,caryear,category,carmodel,milage,price,description from cars where carid=%s',[carid])
     data=cursor.fetchone()
     return render_template('cars.html',data=data)
 @app.route('/update/<carid>',methods=['GET','POST'])
 def update(carid):
     if session.get('user'):
-        cursor=mysql.connection.cursor()
-        cursor.execute('select carname,carno,caryear,category,carmodel,milage,price,description from notes where carid=%s',[carid])
+        cursor=mydb.cursor()
+        cursor.execute('select carname,carno,caryear,category,carmodel,milage,price,description from cars where carid=%s',[carid])
         data=cursor.fetchone()
         cursor.close()
         if request.method=='POST':
-                carname=request.form['carname']
-                carno=request.form['carno']
-                caryear=request.form['caryear']
-                category=request.form['category']
-                carmodel=request.form['carmodel']
-                milage=request.form['milage']
-                price=request.form['price']
-                description=request.form['description']
-
-                cursor=mysql.connection.cursor()
-                cursor.execute('update notes set carname=%s,carno=%s,caryear=%s,category=%s,carmodel=%s,milage=%s,price=%s,description=%s where carid=%s',[carname,carno,caryear,category,carmodel,milage,price,description])
-                mysql.connection.commit()
-                cursor.close()
-                flash('Notes updated successfully')
-                return redirect(url_for('edit'))
+              name=request.form['name']
+              carno=request.form['carno']
+              year=request.form['year']
+              category=request.form['category']
+              model=request.form['model']
+              milage=request.form['milage']
+              price=request.form['price']
+              desc=request.form['desc']
+              cursor=mydb.cursor()
+              cursor.execute('update cars set carname=%s,carno=%s,caryear=%s,category=%s,carmodel=%s,milage=%s,price=%s,description=%s where carid=%s',[name,carno,year,category,model,milage,price,desc,carid])
+              mydb.commit()
+              cursor.close()
+              flash('Notes updated successfully')
+              return redirect(url_for('dashuser'))
                 
-        return render_template('edit.html',data=data)
+        return render_template('dashusers.html',data=data)
     else:
         return redirect(url_for('login'))
 @app.route('/delete/<carid>')
 def delete(carid):
-    cursor=mysql.connection.cursor()
+    cursor=mydb.cursor()
     cursor.execute('delete from cars where carid=%s',[carid])
-    mysql.connection.commit()
+    mydb.commit()
     cursor.close()
     flash('Notes deleted successfully')
-    return redirect(url_for('edit'))'''
-@app.route('/bookings', methods=['POST','GET'])
-def bookings():
+    return redirect(url_for('dashcartable'))
+@app.route('/dashpayment', methods=['POST','GET'])
+@app.route('/deleteuser/<mobile>')
+def deleteuser(mobile):
+    cursor=mydb.cursor()
+    cursor.execute('delete from register where mobile=%s',[mobile])
+    mydb.commit()
+    cursor.close()
+    flash('user deleted successfully')
+    return redirect(url_for('dashuserdetails'))
+@app.route('/dashpayment', methods=['POST','GET'])
+def dashpayment():
     if session.get('user'):
         cursor = mydb.cursor()
         cursor.execute("SELECT * FROM rent")
         rent = cursor.fetchall()
-        return render_template('bookings.html', rent=rent)
-    return render_template('bookings.html')
+        return render_template('dashpayment.html', rent=rent)
+    return render_template('dashpayment.html')
 @app.route('/pay/',methods=['POST'])
 def pay():
     if session.get('user'):
