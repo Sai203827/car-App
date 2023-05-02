@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang ="en">
+  <head>
+    <meta charset = "UFT-8">
+    <title>Contact US Page</title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body{
+        background-image:url(https://images.pexels.com/photos/754082/pexels-photo-754082.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+        background-size:cover;
+/*        background-size: 100vh;*/
+        color: white;
+        height: 100vh;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack:center;
+        -ms-flex-pack:center;
+        justify-content:center;
+        align-items:center;
+        perspective: 1000px;
+        transform-style:preserve-3d;
+        position: relative;
+        background-color:#111;
+        font-family:arial;
+        
+      }
+      .container{
+        min-width: 700px;
+        min-height:350px;
+        border-radius:20px;
+        position:relative;
+        transition:1.5s ease-in-out;
+        transform-style: preserve-3d;
+      }
+      .side{
+        position:absolute;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        padding: 20px 50px;
+        color: white;
+        transform-style:preserve-3d;
+        backface-visibility:hidden;
+        border-radius: 2px;
+      }
+      .content{
+        transform: translateZ(70px)
+          scale(0.8);
+        line-height: 1.5em;
+      }
+      .content h1{
+        position: relative;
+        font-size: 20px;
+        font-family: arial;
+      }
+      .content h1:before{
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        height: 3px;
+        background-color: white;
+        width: 70px;
+        left:50%;
+        transform: translateX(-50%);
+      }
+      .front{
+        z-index:2;
+        background-image:url(https://www.hdcarwallpapers.com/walls/lamborghini_urus_shiny_black_package_4k_3-HD.jpg);
+        background-size:cover;
+/*        background-size: 100vh;*/
+        color: white;
+      }
+      .back{
+        background-color: #333;
+        transform:rotateY(180deg);
+        z-index:0;
+        padding-top: 10px;
+        background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8yoK3dhwHdTn5RYuxgc2rcaXVmd5ug9hA_pCWjvqXQA&usqp=CAU&ec=48600112);
+        background-size: cover;
+      }
+      .container:hover{
+        transform: rotateY(180deg);
+      }
+      .back h1{
+        margin: 0;
+      }
+      form label, form input{
+        display: block;
+      }
+      form input, form textarea{
+        background: transparent;
+        border:0;
+        border-bottom: 2px solid white;
+        padding: 5px;
+        width: 100%;
+        color: white;
+        outline: none;
+      }
+      form label{
+        margin: 15px 0;
+      }
+      form input[type="submit"]{
+        display: block;
+        width: auto;
+        margin: 10px auto;
+        padding: 5px 10px;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    <div class = "container">
+      <div class="front side">
+        <div class="content">
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <h1>Contact US</h1> 
+        </div>
+      </div>
+      <div class="back side">
+        <div class="content">
+          <h1>Contact Us</h1>
+          <form>
+            <label for ="">Your Name: </label>
+            <input type="text" placeholder="Put your full name">
+            <label for ="">Your Email: </label>
+            <input type="text" placeholder="Example@gmail.com">
+            <label for ="">Your Message: </label>
+            <textarea placeholder="Type your message"></textarea>
+            <input type = "submit" value="Submit">
+          </form>
+        </div>
+      </div>  
+    </div>
+  </body>
+</html>
+  

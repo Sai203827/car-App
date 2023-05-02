@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
+</head>
+<style>
+    section{
+    background: url(https://wallpaperaccess.com/full/83785.jpg) no-repeat;
+    animation: animateBg 5s linear infinite;
+}
+@keyframes animateBg{
+    100%{
+        filter:hue-rotate(360deg);
+    }
+}
+table{
+    background: blur;
+}
+</style>
+<body>
+ <!-- Please, give credits if used somewhere -->
+
+<!-- UPDATE LOG 17/08/2017 -->
+
+<!-- 
+- Reduced profile image size to 70% on 480px resolutions and lower
+- Corrected some other responsivity bugs
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-red.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</head>
+
+<body>
+  <section class="navigation">
+    <p class="title">
+      RENT4U
+    <p>
+      
+    <img class="profile-pic" src="{{url_for('static', filename='images/team1.jpg')}}" alt="Profile Pic">
+    
+    <p class="name">
+       K. Sai Ranganadh
+    <p>
+      
+      <div class="function-wrapper">
+      <button id="profile" class="function"><i class="material-icons">account_circle</i></button>
+        <div class="mdl-tooltip" for="profile">
+        Profile
+        </div>
+        
+      <button id="settings" class="function"><i class="material-icons">settings</i></button>
+        <div class="mdl-tooltip" for="settings">
+        Settings
+        </div>
+        
+        
+      <button id="logout" class="function"><i class="material-icons">clear</i></button>
+        <div class="mdl-tooltip" for="logout">
+        Log out
+        </div>
+    </div>
+    
+    <div class="options-wrapper">
+      <div class="panel-option active">
+        <a href="{{url_for('dashboard')}}" ><i class="material-icons">computer</i>
+        <p>Dashboard</p></a>
+      </div>
+      
+      <div class="panel-option">
+        <a href="{{url_for('admin_home')}}" > <i  class="material-icons">add</i>
+        <p>Add Cars</p></a>
+      </div>
+      
+      <div class="panel-option">
+        <a href="{{url_for('dashcartable')}}"><i class="material-icons">tab</i>
+        <p>Car Table</p></a>
+      </div>
+      <div class="panel-option">
+        <a href="{{url_for('dashpayment')}}"> <i class="material-icons">money</i>
+        <p>Payment</p></a>
+      </div>
+      
+      <div class="panel-option">
+        <a href="{{url_for('dashuserdetails')}}"><i class="material-icons">man</i>
+        <p>Users</p></a>
+      </div>
+    <div>
+  </section>
+      
+      <section class="page-content"> 
+        <div class="header"> 
+          <p class="big">Dashboard <span class="small">all informations about your website</span></p>
+          
+          <div id="wrapper">
+          <input class="search" type="search" placeholder="search...">
+          <button class="search-btn">
+            <i class="material-icons">search</i>
+          </button>
+            
+            <button id="help" class="help">
+            <i class="material-icons">help</i>
+            </button>
+            
+            <div class="mdl-tooltip" for="help">
+            Help
+            </div>
+          </div>
+        </div>
+
+
+
+            <form class="form-item">
+                
+                <label class="ilabel">Search:</label>&nbsp;&nbsp;
+                <input type="search" name="search" placeholder="Search here"/>
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <center>
+
+                <table border="2" width="60%" style="color: aliceblue;">
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Car ID</th>
+                        <th>Car Name</th>
+                        <th>Check-In Date</th>
+                        <th>Check-Out Date</th>
+                        <th>Price</th>
+                        <th>Mobile Number</th>
+                    </tr>
+                    {% for i in rent %}
+                    <tr>
+                        <td>{{ i[0] }}</td>
+                        <td>{{ i[1] }}</td>
+                        <td>{{ i[2] }}</td>
+                        <td>{{ i[3] }}</td>
+                        <td>{{ i[4] }}</td>
+                        <td>{{ i[5] }}</td>
+                        <td>{{ i[6] }}</td>
+                        <td>{{ i[7] }}</td>
+                       
+                        </tr>
+                    {% endfor %}
+                </table>
+            </center>
+        </section>
+            <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>  
+        
+        </div>
+
+
+</body>
+</body>
+</html>
+
+
